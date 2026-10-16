@@ -1,9 +1,11 @@
-FROM mcr.microsoft.com/devcontainers/universal:linux
+FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
 
 # Install mosquitto client
 RUN rm -f /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
-    apt-get install mosquitto-clients -y
+    apt-get install --no-install-recommends mosquitto-clients -y && \
+    mkdir -p /usr/local/etc/vscode-dev-containers && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install Step CLI
 RUN wget https://dl.smallstep.com/gh-release/cli/docs-cli-install/v0.23.4/step-cli_0.23.4_amd64.deb && \
